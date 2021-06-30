@@ -1,5 +1,4 @@
-#pragma once
-#include <iostream>
-using namespace std;
+﻿#pragma once
+#include "SumomoGame.h"
 
-int Hello();
+using namespace Sumomo2::Core;

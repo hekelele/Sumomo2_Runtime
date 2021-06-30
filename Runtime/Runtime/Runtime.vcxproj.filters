@@ -9,9 +9,18 @@
     <ClInclude Include="Sumomo2.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="SumomoGame.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sumomo2.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SumomoGame.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>

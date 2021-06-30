@@ -164,10 +164,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework.h" />
     <ClInclude Include="Sumomo2.h" />
+    <ClInclude Include="SumomoGame.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sumomo2.cpp" />
+    <ClCompile Include="SumomoGame.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
