@@ -4,6 +4,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{64b063e6-dbf9-4e27-98d0-2059c9cd494e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{bcd03416-4844-448c-bebd-ebefda06bd00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sumomo2.h">
@@ -15,6 +18,12 @@
     <ClInclude Include="Framework.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="SumomoRenderer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="GDI_Renderer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sumomo2.cpp">
@@ -22,6 +31,9 @@
     </ClCompile>
     <ClCompile Include="SumomoGame.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GDI_Renderer.cpp">
+      <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

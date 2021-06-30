@@ -1,4 +1,7 @@
 ﻿#include "SumomoGame.h"
+#include "Sumomo2.h"
+
+using namespace Sumomo2::Render;
 
 namespace Sumomo2::Core {
 	SumomoGame::SumomoGame(HINSTANCE hInstance)
@@ -12,7 +15,17 @@ namespace Sumomo2::Core {
 
 	HRESULT SumomoGame::Initialize()
 	{
+		if (Sumomo2::Global::Game == NULL) {
+			Sumomo2::Global::Game = this;
+		}
+		else
+		{
+			return E_FAIL;
+		}
+
 		HRESULT hr = S_OK;
+
+		hr = m_Renderer.Initialize();
 
 		if (SUCCEEDED(hr))
 		{
@@ -69,6 +82,7 @@ namespace Sumomo2::Core {
 			else
 			{
 				Update();
+				Render();
 			}
 		}
 	}
@@ -83,6 +97,7 @@ namespace Sumomo2::Core {
 		switch (message)
 		{
 		case WM_PAINT:
+			Sumomo2::Global::Game->Render();
 			ValidateRect(hWnd,NULL);
 			break;
 		case WM_KEYDOWN:
@@ -92,6 +107,7 @@ namespace Sumomo2::Core {
 			break;
 
 		case WM_DESTROY:
+			Sumomo2::Global::Game->Cleanup();
 			PostQuitMessage(0);
 			break;
 
@@ -102,7 +118,17 @@ namespace Sumomo2::Core {
 		return 0;
 	}
 
+	void SumomoGame::Render()
+	{
+		m_Renderer.Render(m_hWnd);
+	}
+
 	void SumomoGame::Update()
 	{
+	}
+
+	void SumomoGame::Cleanup()
+	{
+		Sumomo2::Global::Game = NULL;
 	}
 }

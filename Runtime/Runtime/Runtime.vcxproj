@@ -165,10 +165,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="GDI_Renderer.h" />
     <ClInclude Include="Sumomo2.h" />
     <ClInclude Include="SumomoGame.h" />
+    <ClInclude Include="SumomoRenderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GDI_Renderer.cpp" />
     <ClCompile Include="Sumomo2.cpp" />
     <ClCompile Include="SumomoGame.cpp" />
   </ItemGroup>
