@@ -92,6 +92,11 @@ namespace Sumomo2::Core {
 		UnregisterClass(L"SumomoWndClass", m_hInstance);
 	}
 
+	void SumomoGame::AddGDI_Canvas(Sumomo2::Render::GDI::GDI_FreeCanvas* canvas)
+	{
+		m_Renderer.AddCanvas(canvas);
+	}
+
 	LRESULT SumomoGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		switch (message)

@@ -1,6 +1,7 @@
 ﻿#include "GDI_Renderer.h"
+#include "GDI_FreeCanvas.h"
 
-namespace Sumomo2::Render 
+namespace Sumomo2::Render::GDI
 {
 	HRESULT GDI_Renderer::Initialize()
 	{
@@ -11,11 +12,10 @@ namespace Sumomo2::Render
 	{
 		PAINTSTRUCT paintStruct;
 		HDC hdc = BeginPaint(hWnd,&paintStruct);
-		// do something
-		RECT rect;
-		GetClientRect(hWnd, &rect);
-		DrawText(hdc, TEXT("This is a skeleton application!"), -1, &rect,
-			DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+		
+		for (unsigned int i = 0; i < m_CanvasList.size(); i++) {
+			this->m_CanvasList[i]->Draw(hdc);
+		}
 
 		EndPaint(hWnd, &paintStruct);
 	}
@@ -23,5 +23,9 @@ namespace Sumomo2::Render
 	void GDI_Renderer::Cleanup()
 	{
 
+	}
+	void GDI_Renderer::AddCanvas(GDI_FreeCanvas * canvas)
+	{
+		m_CanvasList.push_back(canvas);
 	}
 }

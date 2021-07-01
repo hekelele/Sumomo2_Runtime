@@ -7,28 +7,28 @@
 
 namespace Sumomo2D::Math
 {
-	typedef struct _Vector2 {
+	struct Vector2 {
 		float x;
 		float y;
 
 		//= Assignment ============================================================
 
-		_Vector2() {
+		Vector2() {
 			x = 0;
 			y = 0;
 		}
 
-		_Vector2(const _Vector2& vector) {
+		Vector2(const Vector2& vector) {
 			this->x = vector.x;
 			this->y = vector.y;
 		}
 
-		_Vector2(float x, float y) {
+		Vector2(float x, float y) {
 			this->x = x;
 			this->y = y;
 		}
 
-		_Vector2(int x, int y) {
+		Vector2(int x, int y) {
 			this->x = static_cast<float>(x);
 			this->y = static_cast<float>(y);
 		}
@@ -38,16 +38,16 @@ namespace Sumomo2D::Math
 
 		//= ADDITION ==============================================================
 
-		_Vector2 operator+(const _Vector2& rhs) const
+		Vector2 operator+(const Vector2& rhs) const
 		{
-			return _Vector2
+			return Vector2
 			(
 				this->x + rhs.x,
 				this->y + rhs.y
 			);
 		}
 
-		void operator+=(const _Vector2& rhs)
+		void operator+=(const Vector2& rhs)
 		{
 			this->x += rhs.x;
 			this->y += rhs.y;
@@ -58,16 +58,16 @@ namespace Sumomo2D::Math
 
 		//= SUBTRACTION ===========================================================
 
-		_Vector2 operator-(const _Vector2& rhs) const
+		Vector2 operator-(const Vector2& rhs) const
 		{
-			return _Vector2
+			return Vector2
 			(
 				this->x - rhs.x,
 				this->y - rhs.y
 			);
 		}
 
-		void operator-=(const _Vector2& rhs)
+		void operator-=(const Vector2& rhs)
 		{
 			this->x -= rhs.x;
 			this->y -= rhs.y;
@@ -78,9 +78,9 @@ namespace Sumomo2D::Math
 
 		//= MULTIPLICATION ========================================================
 
-		_Vector2 operator*(const float scalar) const
+		Vector2 operator*(const float scalar) const
 		{
-			return _Vector2
+			return Vector2
 			(
 				this->x * scalar,
 				this->y * scalar
@@ -93,9 +93,9 @@ namespace Sumomo2D::Math
 			this->y *= scalar;
 		}
 
-		friend _Vector2 operator*(const float scalar, _Vector2 vec)
+		friend Vector2 operator*(const float scalar, Vector2 vec)
 		{
-			return _Vector2
+			return Vector2
 			(
 				vec.x  * scalar,
 				vec.y  * scalar
@@ -107,9 +107,9 @@ namespace Sumomo2D::Math
 
 		//= DIVISION ==============================================================
 
-		_Vector2 operator/(const float scalar) const
+		Vector2 operator/(const float scalar) const
 		{
-			return _Vector2
+			return Vector2
 			(
 				this->x / scalar,
 				this->y / scalar
@@ -122,9 +122,9 @@ namespace Sumomo2D::Math
 			this->y /= scalar;
 		}
 
-		friend _Vector2 operator/(const float scalar, _Vector2 vec)
+		friend Vector2 operator/(const float scalar, Vector2 vec)
 		{
-			return _Vector2
+			return Vector2
 			(
 				vec.x / scalar,
 				vec.y / scalar
@@ -136,12 +136,12 @@ namespace Sumomo2D::Math
 
 		//= EQUATION ==============================================================
 
-		bool operator==(const _Vector2& rhs) const
+		bool operator==(const Vector2& rhs) const
 		{
 			return this->x == rhs.x && this->y == rhs.y;
 		}
 
-		bool operator!=(const _Vector2& rhs) const
+		bool operator!=(const Vector2& rhs) const
 		{
 			return this->x != rhs.x || this->y != rhs.y;
 		}
@@ -161,12 +161,12 @@ namespace Sumomo2D::Math
 			return x * x + y * y;
 		}
 
-		[[nodiscard]] static float Distance(const _Vector2& a, const _Vector2& b)
+		[[nodiscard]] static float Distance(const Vector2& a, const Vector2& b)
 		{
 			return (a - b).Magnitude();
 		}
 
-		[[nodiscard]] static float DistanceSquared(const _Vector2& a, const _Vector2& b)
+		[[nodiscard]] static float DistanceSquared(const Vector2& a, const Vector2& b)
 		{
 			return (a - b).MagnitudeSquared();
 		}
@@ -177,21 +177,21 @@ namespace Sumomo2D::Math
 			this->y /= mag;
 		}
 
-		[[nodiscard]] _Vector2 NormalizeValue() {
+		[[nodiscard]] Vector2 NormalizeValue() {
 			float mag = this->Magnitude();
-			return _Vector2
+			return Vector2
 			(
 				this->x / mag,
 				this->y / mag
 			);
 		}
 
-		static const _Vector2 Zero;
-		static const _Vector2 One;
+		static const Vector2 Zero;
+		static const Vector2 One;
 
 		//=========================================================================
 
-	}Vector2;
+	};
 
 
 	//= HIGH SPEED FUNCTION ===================================================

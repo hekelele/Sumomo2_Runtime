@@ -1,21 +1,34 @@
 ﻿#include <Sumomo2.h>
 #include <iostream>
+#include <GDI_FreeCanvas.h>
 using namespace std;
+using namespace Sumomo2::Render::GDI;
+
+class  MyCanvas: public GDI_FreeCanvas
+{
+public:
+	void Draw(HDC hdc) {
+		HPEN gPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+		SelectObject(hdc, gPen);
+		MoveToEx(hdc, 20, 20, NULL);
+		LineTo(hdc, 100, 100);
+		LineTo(hdc, 400, 20);
+		LineTo(hdc, 20, 20);
+		DeleteObject(gPen);
+	}
+};
+
+
 
 int WINAPI WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdLine, int  nCmdShow)
 {
 	SumomoGame game(hInstance);
+	game.AddGDI_Canvas(new MyCanvas());
 	
-	for (int i = 0; i < 10; i++) {
-		float a = RandomRange(0, 100);
+		/*
 #ifndef NDEBUG
-		std::cout << a << std::endl;
 #endif
-	}
-	
-
-
-	
+	}*/
 
 	if (SUCCEEDED(game.Initialize()))
 	{

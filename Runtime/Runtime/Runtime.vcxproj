@@ -164,8 +164,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="GDI_FreeCanvas.h" />
     <ClInclude Include="GDI_Renderer.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Sumomo2.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="GDI_FreeCanvas.cpp" />
     <ClCompile Include="GDI_Renderer.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Sumomo2.cpp" />
