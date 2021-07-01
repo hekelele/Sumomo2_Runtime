@@ -7,6 +7,12 @@
     <Filter Include="Render">
       <UniqueIdentifier>{bcd03416-4844-448c-bebd-ebefda06bd00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{052d0ee3-8111-4f77-9b4a-d1628631be7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GDI">
+      <UniqueIdentifier>{d4324838-a993-42e2-809e-2f86155087fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sumomo2.h">
@@ -21,8 +27,17 @@
     <ClInclude Include="SumomoRenderer.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Constant.h">
+      <Filter>Math</Filter>
+    </ClInclude>
     <ClInclude Include="GDI_Renderer.h">
-      <Filter>Render</Filter>
+      <Filter>GDI</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -32,8 +47,14 @@
     <ClCompile Include="SumomoGame.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
     <ClCompile Include="GDI_Renderer.cpp">
-      <Filter>Render</Filter>
+      <Filter>GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -164,16 +164,21 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Constant.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GDI_Renderer.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Sumomo2.h" />
     <ClInclude Include="SumomoGame.h" />
     <ClInclude Include="SumomoRenderer.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GDI_Renderer.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Sumomo2.cpp" />
     <ClCompile Include="SumomoGame.cpp" />
+    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
