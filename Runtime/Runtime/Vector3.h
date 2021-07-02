@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 //- INCLUDES --------------------------------------------------------------
 #include <math.h>
@@ -7,31 +7,36 @@
 
 namespace Sumomo2::Math
 {
-	class Vector2 {
+	class Vector3 {
 	public:
 		float x;
 		float y;
+		float z;
 
 		//= Assignment ============================================================
 
-		Vector2() {
+		Vector3() {
 			x = 0;
 			y = 0;
+			z = 0;
 		}
 
-		Vector2(const Vector2& vector) {
+		Vector3(const Vector3& vector) {
 			this->x = vector.x;
 			this->y = vector.y;
+			this->z = vector.z;
 		}
 
-		Vector2(float x, float y) {
+		Vector3(float x, float y, float z) {
 			this->x = x;
 			this->y = y;
+			this->z = z;
 		}
 
-		Vector2(int x, int y) {
+		Vector3(int x, int y, int z) {
 			this->x = static_cast<float>(x);
 			this->y = static_cast<float>(y);
+			this->z = static_cast<float>(z);
 		}
 
 		//=========================================================================
@@ -39,19 +44,21 @@ namespace Sumomo2::Math
 
 		//= ADDITION ==============================================================
 
-		Vector2 operator+(const Vector2& rhs) const
+		Vector3 operator+(const Vector3& rhs) const
 		{
-			return Vector2
+			return Vector3
 			(
 				this->x + rhs.x,
-				this->y + rhs.y
+				this->y + rhs.y,
+				this->z + rhs.z
 			);
 		}
 
-		void operator+=(const Vector2& rhs)
+		void operator+=(const Vector3& rhs)
 		{
 			this->x += rhs.x;
 			this->y += rhs.y;
+			this->z += rhs.z;
 		}
 
 		//=========================================================================
@@ -59,19 +66,21 @@ namespace Sumomo2::Math
 
 		//= SUBTRACTION ===========================================================
 
-		Vector2 operator-(const Vector2& rhs) const
+		Vector3 operator-(const Vector3& rhs) const
 		{
-			return Vector2
+			return Vector3
 			(
 				this->x - rhs.x,
-				this->y - rhs.y
+				this->y - rhs.y,
+				this->z - rhs.z
 			);
 		}
 
-		void operator-=(const Vector2& rhs)
+		void operator-=(const Vector3& rhs)
 		{
 			this->x -= rhs.x;
 			this->y -= rhs.y;
+			this->z -= rhs.z;
 		}
 
 		//=========================================================================
@@ -79,12 +88,13 @@ namespace Sumomo2::Math
 
 		//= MULTIPLICATION ========================================================
 
-		Vector2 operator*(const float scalar) const
+		Vector3 operator*(const float scalar) const
 		{
-			return Vector2
+			return Vector3
 			(
 				this->x * scalar,
-				this->y * scalar
+				this->y * scalar,
+				this->z * scalar
 			);
 		}
 
@@ -92,28 +102,30 @@ namespace Sumomo2::Math
 		{
 			this->x *= scalar;
 			this->y *= scalar;
+			this->z *= scalar;
 		}
 
-		friend Vector2 operator*(const float scalar, Vector2 vec)
+		friend Vector3 operator*(const float scalar, Vector3 vec)
 		{
-			return Vector2
+			return Vector3
 			(
 				vec.x  * scalar,
-				vec.y  * scalar
+				vec.y  * scalar,
+				vec.z  * scalar
 			);
 		}
 
 		//=========================================================================
 
-
 		//= DIVISION ==============================================================
 
-		Vector2 operator/(const float scalar) const
+		Vector3 operator/(const float scalar) const
 		{
-			return Vector2
+			return Vector3
 			(
 				this->x / scalar,
-				this->y / scalar
+				this->y / scalar,
+				this->z / scalar
 			);
 		}
 
@@ -121,14 +133,16 @@ namespace Sumomo2::Math
 		{
 			this->x /= scalar;
 			this->y /= scalar;
+			this->z /= scalar;
 		}
 
-		friend Vector2 operator/(const float scalar, Vector2 vec)
+		friend Vector3 operator/(const float scalar, Vector3 vec)
 		{
-			return Vector2
+			return Vector3
 			(
 				vec.x / scalar,
-				vec.y / scalar
+				vec.y / scalar,
+				vec.z / scalar
 			);
 		}
 
@@ -137,14 +151,14 @@ namespace Sumomo2::Math
 
 		//= EQUATION ==============================================================
 
-		bool operator==(const Vector2& rhs) const
+		bool operator==(const Vector3& rhs) const
 		{
-			return this->x == rhs.x && this->y == rhs.y;
+			return this->x == rhs.x && this->y == rhs.y && this->z == rhs.z;
 		}
 
-		bool operator!=(const Vector2& rhs) const
+		bool operator!=(const Vector3& rhs) const
 		{
-			return this->x != rhs.x || this->y != rhs.y;
+			return this->x != rhs.x || this->y != rhs.y || this->z != rhs.z;
 		}
 
 		//=========================================================================
@@ -154,20 +168,20 @@ namespace Sumomo2::Math
 
 		[[nodiscard]] float Magnitude() const
 		{
-			return sqrtf(x * x + y * y);
+			return sqrtf(x * x + y * y + z * z);
 		}
 
 		[[nodiscard]] float MagnitudeSquared() const
 		{
-			return x * x + y * y;
+			return x * x + y * y + z * z;
 		}
 
-		[[nodiscard]] static float Distance(const Vector2& a, const Vector2& b)
+		[[nodiscard]] static float Distance(const Vector3& a, const Vector3& b)
 		{
 			return (a - b).Magnitude();
 		}
 
-		[[nodiscard]] static float DistanceSquared(const Vector2& a, const Vector2& b)
+		[[nodiscard]] static float DistanceSquared(const Vector3& a, const Vector3& b)
 		{
 			return (a - b).MagnitudeSquared();
 		}
@@ -176,35 +190,35 @@ namespace Sumomo2::Math
 			float mag = this->Magnitude();
 			this->x /= mag;
 			this->y /= mag;
+			this->z /= mag;
 		}
 
-		[[nodiscard]] Vector2 NormalizeValue() {
+		[[nodiscard]] Vector3 NormalizeValue() {
 			float mag = this->Magnitude();
-			return Vector2
+			return Vector3
 			(
 				this->x / mag,
-				this->y / mag
+				this->y / mag,
+				this->z / mag
 			);
 		}
 
-		static const Vector2 Zero;
-		static const Vector2 One;
+		static const Vector3 Zero;
+		static const Vector3 One;
 
 		//=========================================================================
 
 	};
 
-
 	//= HIGH SPEED FUNCTION ===================================================
 
-	void VEC2_ADD(Vector2& result, const Vector2& va, const Vector2& vb);
-	void VEC2_SUB(Vector2& result, const Vector2& va, const Vector2& vb);
-	void VEC2_NORM(Vector2& result, const Vector2& source);
-	[[nodiscard]] float VEC2_DOT(const Vector2& va, const Vector2& vb);
-	[[nodiscard]] float VEC2_CROSS_1(const Vector2& va, const Vector2& vb);
-	[[nodiscard]] Vector2 VEC2_CROSS_2(const Vector2& v);
-	[[nodiscard]] float VEC2_DEGREE(const Vector2& va, const Vector2& vb);
-	[[nodiscard]] float VEC2_RADIAN(const Vector2& va, const Vector2& vb);
+	void VEC3_ADD(Vector3& result, const Vector3& va, const Vector3& vb);
+	void VEC3_SUB(Vector3& result, const Vector3& va, const Vector3& vb);
+	void VEC3_NORM(Vector3& result, const Vector3& source);
+	[[nodiscard]] float VEC3_DOT(const Vector3& va, const Vector3& vb);
+	[[nodiscard]] Vector3 VEC3_CROSS(const Vector3& va, const Vector3& vb);
+	[[nodiscard]] float VEC3_DEGREE(const Vector3& va, const Vector3& vb);
+	[[nodiscard]] float VEC3_RADIAN(const Vector3& va, const Vector3& vb);
 
 	//=========================================================================
 }

@@ -1,7 +1,7 @@
 ﻿#include "Vector2.h"
 
 
-namespace Sumomo2D::Math {
+namespace Sumomo2::Math {
 	const Vector2 Vector2::Zero(0.0f, 0.0f);
 	const Vector2 Vector2::One(1.0f, 1.0f);
 
@@ -27,6 +27,19 @@ namespace Sumomo2D::Math {
 	float VEC2_DOT(const Vector2 & va, const Vector2 & vb)
 	{
 		return va.x*vb.x + va.y*vb.y;
+	}
+
+	float VEC2_CROSS_1(const Vector2 & va, const Vector2 & vb)
+	{
+		return va.x * vb.y - va.x * vb.y;
+	}
+
+	Vector2 VEC2_CROSS_2(const Vector2 & v)
+	{
+		return Vector2{
+			v.y,
+			-v.x
+		};
 	}
 
 	float VEC2_DEGREE(const Vector2 & va, const Vector2 & vb)
