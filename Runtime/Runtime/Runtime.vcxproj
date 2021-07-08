@@ -70,28 +70,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(IncludePath);$(DX_HOME)\Include\</IncludePath>
-    <LibraryPath>$(LibraryPath);$(DX_HOME)\Lib\x86</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Sumomo2_d</TargetName>
     <OutDir>$(SolutionDir)\Build\x86\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(IncludePath);$(DX_HOME)\Include\</IncludePath>
-    <LibraryPath>$(LibraryPath);$(DX_HOME)\Lib\x86</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <TargetName>Sumomo2</TargetName>
     <OutDir>$(SolutionDir)\Build\x86\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(IncludePath);$(DX_HOME)\Include\</IncludePath>
-    <LibraryPath>$(LibraryPath);$(DX_HOME)\Lib\x64</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath);</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x64$(LibraryPath);</LibraryPath>
     <TargetName>Sumomo2_d</TargetName>
     <OutDir>$(SolutionDir)\Build\x64\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(IncludePath);$(DX_HOME)\Include\</IncludePath>
-    <LibraryPath>$(LibraryPath);$(DX_HOME)\Lib\x64</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
     <TargetName>Sumomo2</TargetName>
     <OutDir>$(SolutionDir)\Build\x64\</OutDir>
   </PropertyGroup>
@@ -166,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="Color.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="D3D_Renderer.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GDI_FreeCanvas.h" />
     <ClInclude Include="GDI_Renderer.h" />
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="D3D_Renderer.cpp" />
     <ClCompile Include="GDI_FreeCanvas.cpp" />
     <ClCompile Include="GDI_Renderer.cpp" />
     <ClCompile Include="Random.cpp" />

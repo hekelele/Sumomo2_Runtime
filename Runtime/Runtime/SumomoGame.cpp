@@ -15,61 +15,13 @@ namespace Sumomo2::Core {
 
 	HRESULT SumomoGame::Initialize()
 	{
-		if (Sumomo2::Global::Game == NULL) {
-			Sumomo2::Global::Game = this;
-		}
-		else
-		{
-			return E_FAIL;
-		}
+		FAIL_RETURN(CheckGameInstance());
+		FAIL_RETURN(RegisterGameWindow());
+		FAIL_RETURN(CreateGameWindow());
+		FAIL_RETURN(InitializeSubSystems());
+		ShowGameWindow();
 
-		HRESULT hr = S_OK;
-
-		hr = m_Renderer.Initialize();
-
-		if (SUCCEEDED(hr))
-		{
-			WNDCLASSEX wcex = { 0 };
-			wcex.cbSize = sizeof(WNDCLASSEX);
-			wcex.style = CS_HREDRAW | CS_VREDRAW;
-			wcex.lpfnWndProc = SumomoGame::WndProc;
-			wcex.cbClsExtra = 0;
-			wcex.cbWndExtra = 0;
-			wcex.hInstance = m_hInstance;
-			wcex.hIcon = NULL;
-			wcex.hCursor = LoadCursor(NULL, IDI_APPLICATION);
-			wcex.hbrBackground = NULL;
-			wcex.lpszMenuName = NULL;
-			wcex.lpszClassName = L"SumomoWndClass";
-
-			// If Register Failed
-			if (!RegisterClassEx(&wcex)) {
-				return E_FAIL;
-			}
-
-			m_hWnd = CreateWindow(
-				L"SumomoWndClass",
-				L"Sumomo Game",
-				WS_OVERLAPPEDWINDOW,
-				CW_USEDEFAULT,
-				CW_USEDEFAULT,
-				640,				// window width
-				480,				// window height
-				NULL,
-				NULL,
-				m_hInstance,
-				NULL);
-
-			hr = m_hWnd ? S_OK : E_FAIL;
-
-			if (SUCCEEDED(hr))
-			{
-				ShowWindow(m_hWnd, SW_SHOWNORMAL);
-				UpdateWindow(m_hWnd);
-			}
-		}
-
-		return hr;
+		return S_OK;
 	}
 	void SumomoGame::Run()
 	{
@@ -95,6 +47,74 @@ namespace Sumomo2::Core {
 	void SumomoGame::AddGDI_Canvas(Sumomo2::Render::GDI::GDI_FreeCanvas* canvas)
 	{
 		m_Renderer.AddCanvas(canvas);
+	}
+
+
+	HRESULT SumomoGame::CheckGameInstance()
+	{
+		if (Sumomo2::Global::Game == NULL) {
+			Sumomo2::Global::Game = this;
+			return S_OK;
+		}
+		else
+		{
+			return E_FAIL;
+		}
+	}
+
+
+	HRESULT SumomoGame::RegisterGameWindow()
+	{
+		WNDCLASSEX wcex = { 0 };
+		wcex.cbSize = sizeof(WNDCLASSEX);
+		wcex.style = CS_HREDRAW | CS_VREDRAW;
+		wcex.lpfnWndProc = SumomoGame::WndProc;
+		wcex.cbClsExtra = 0;
+		wcex.cbWndExtra = 0;
+		wcex.hInstance = m_hInstance;
+		wcex.hIcon = NULL;
+		wcex.hCursor = LoadCursor(NULL, IDI_APPLICATION);
+		wcex.hbrBackground = NULL;
+		wcex.lpszMenuName = NULL;
+		wcex.lpszClassName = L"SumomoWndClass";
+
+		// If Register Failed
+		if (!RegisterClassEx(&wcex)) {
+			return E_FAIL;
+		}
+
+		return S_OK;
+	}
+
+	HRESULT SumomoGame::CreateGameWindow()
+	{
+		m_hWnd = CreateWindow(
+			L"SumomoWndClass",
+			L"Sumomo Game",
+			WS_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			640,				// window width
+			480,				// window height
+			NULL,
+			NULL,
+			m_hInstance,
+			NULL);
+
+
+		return m_hWnd ? S_OK : E_FAIL;
+	}
+
+	HRESULT SumomoGame::InitializeSubSystems()
+	{
+		HRESULT hr = m_Renderer.Initialize(m_hWnd);
+		return hr;
+	}
+
+	void SumomoGame::ShowGameWindow()
+	{
+		ShowWindow(m_hWnd, SW_SHOWNORMAL);
+		UpdateWindow(m_hWnd);
 	}
 
 	LRESULT SumomoGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -125,7 +145,7 @@ namespace Sumomo2::Core {
 
 	void SumomoGame::Render()
 	{
-		m_Renderer.Render(m_hWnd);
+		m_Renderer.Render();
 	}
 
 	void SumomoGame::Update()
@@ -134,6 +154,7 @@ namespace Sumomo2::Core {
 
 	void SumomoGame::Cleanup()
 	{
+		m_Renderer.Terminate();
 		Sumomo2::Global::Game = NULL;
 	}
 }

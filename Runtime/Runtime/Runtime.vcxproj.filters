@@ -13,6 +13,9 @@
     <Filter Include="GDI">
       <UniqueIdentifier>{d4324838-a993-42e2-809e-2f86155087fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="D3D">
+      <UniqueIdentifier>{ce6ed4f2-3ff8-4727-900a-73e13dc90cf3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sumomo2.h">
@@ -48,6 +51,9 @@
     <ClInclude Include="Vector3.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="D3D_Renderer.h">
+      <Filter>D3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sumomo2.cpp">
@@ -73,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D_Renderer.cpp">
+      <Filter>D3D</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,14 +8,16 @@ namespace Sumomo2::Render::GDI
 	class GDI_Renderer: virtual public SumomoRenderer
 	{
 	public:
-		HRESULT Initialize();
-		void Render(HWND hWnd);
-		void Cleanup();
+		HRESULT Initialize(HWND hWnd);
+		void Render();
+		void Terminate();
 
 		void AddCanvas(GDI_FreeCanvas* canvas);
+	protected:
+		void CreateResources();
+		void ReleaseResources();
 
 	private:
-		HWND m_hWnd;
 		std::vector<GDI_FreeCanvas*> m_CanvasList;
 	};
 }

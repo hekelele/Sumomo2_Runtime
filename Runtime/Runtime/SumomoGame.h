@@ -21,12 +21,20 @@ namespace Sumomo2::Core {
 
 		Sumomo2::Render::GDI::GDI_Renderer m_Renderer;
 
+		HRESULT CheckGameInstance();
+		HRESULT RegisterGameWindow();
+		HRESULT CreateGameWindow();
+		HRESULT InitializeSubSystems();
+		void    ShowGameWindow();
+
 		static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 		void Render();
 		void Update();
 
 		void Cleanup();
+
+		
 	};
 }
 
