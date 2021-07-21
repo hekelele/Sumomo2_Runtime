@@ -80,8 +80,8 @@
     <LibraryPath>$(SUMOMO_HOME)\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SUMOMO_HOME)\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SUMOMO_HOME)\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;$(SUMOMO_HOME)\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x64;$(SUMOMO_HOME)\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SUMOMO_HOME)\includes;$(IncludePath)</IncludePath>
@@ -111,7 +111,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>Sumomo2_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Sumomo2_d.lib;d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>WinMainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>

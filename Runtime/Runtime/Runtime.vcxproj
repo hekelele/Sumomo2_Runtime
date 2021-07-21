@@ -167,6 +167,8 @@
   <ItemGroup>
     <ClInclude Include="Color.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="D3D_Framework.h" />
+    <ClInclude Include="D3D_FreeCanvas.h" />
     <ClInclude Include="D3D_Renderer.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GDI_FreeCanvas.h" />
@@ -180,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="D3D_FreeCanvas.cpp" />
     <ClCompile Include="D3D_Renderer.cpp" />
     <ClCompile Include="GDI_FreeCanvas.cpp" />
     <ClCompile Include="GDI_Renderer.cpp" />

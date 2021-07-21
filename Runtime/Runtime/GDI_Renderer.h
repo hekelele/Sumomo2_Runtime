@@ -8,13 +8,13 @@ namespace Sumomo2::Render::GDI
 	class GDI_Renderer: virtual public SumomoRenderer
 	{
 	public:
-		HRESULT Initialize(HWND hWnd);
+		bool Initialize(HWND hWnd);
 		void Render();
 		void Terminate();
 
 		void AddCanvas(GDI_FreeCanvas* canvas);
 	protected:
-		void CreateResources();
+		bool CreateResources();
 		void ReleaseResources();
 
 	private:

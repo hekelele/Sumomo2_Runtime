@@ -1,20 +1,27 @@
 ﻿#pragma once
-#include "SumomoRenderer.h"
-#include <D3D11.h>
-#include <D3DX11.h>
-#include <DxErr.h>
-
+#include "D3D_Framework.h"
+#include "D3D_FreeCanvas.h"
 
 namespace Sumomo2::Render::D3D {
-	class D3D_Renderer
+	class D3D_Renderer: virtual public SumomoRenderer
 	{
 	public:
-		HRESULT Initialize(HWND hWnd);
+		D3D_Renderer();
+		virtual ~D3D_Renderer();
+		bool Initialize(HWND hWnd);
 		void Render();
 		void Terminate();
+		void AddCanvas(D3D_FreeCanvas* canvas);
 	protected:
-		void CreateResources();
+		bool CreateResources();
 		void ReleaseResources();
+	private:
+		ID3D11Device*			m_Device;
+		ID3D11DeviceContext*	m_Context;
+		ID3D11RenderTargetView* m_RenterTargetView;
+		IDXGISwapChain*			m_SwapChain;
+
+		std::vector<D3D_FreeCanvas*> m_CanvasList;
 	};
 
 }

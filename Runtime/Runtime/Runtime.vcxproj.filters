@@ -54,6 +54,12 @@
     <ClInclude Include="D3D_Renderer.h">
       <Filter>D3D</Filter>
     </ClInclude>
+    <ClInclude Include="D3D_FreeCanvas.h">
+      <Filter>D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D_Framework.h">
+      <Filter>D3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sumomo2.cpp">
@@ -81,6 +87,9 @@
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="D3D_Renderer.cpp">
+      <Filter>D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D_FreeCanvas.cpp">
       <Filter>D3D</Filter>
     </ClCompile>
   </ItemGroup>

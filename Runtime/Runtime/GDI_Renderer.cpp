@@ -3,10 +3,10 @@
 
 namespace Sumomo2::Render::GDI
 {
-	HRESULT GDI_Renderer::Initialize(HWND hWnd)
+	bool GDI_Renderer::Initialize(HWND hWnd)
 	{
 		m_hWnd = hWnd;
-		return S_OK;
+		return m_hWnd != NULL;
 	}
 
 	void GDI_Renderer::Render()
@@ -30,8 +30,9 @@ namespace Sumomo2::Render::GDI
 		m_CanvasList.push_back(canvas);
 	}
 
-	void GDI_Renderer::CreateResources()
+	bool GDI_Renderer::CreateResources()
 	{
+		return true;
 	}
 
 	void GDI_Renderer::ReleaseResources()

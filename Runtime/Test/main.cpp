@@ -2,22 +2,41 @@
 #include <iostream>
 #include <GDI_FreeCanvas.h>
 using namespace std;
-using namespace Sumomo2::Render::GDI;
+using namespace Sumomo2::Render::D3D;
 
-class  MyCanvas: public GDI_FreeCanvas
+class  MyD3dCanvas: public D3D_FreeCanvas
 {
 public:
-	void Draw(HDC hdc) {
-		HPEN gPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
-		SelectObject(hdc, gPen);
-		MoveToEx(hdc, 20, 20, NULL);
-		LineTo(hdc, 100, 100);
-		LineTo(hdc, 400, 20);
-		LineTo(hdc, 20, 20);
-		DeleteObject(gPen);
-	}
+	 MyD3dCanvas();
+	~ MyD3dCanvas();
+
+private:
+	void Render(ID3D11DeviceContext*	m_Context,
+		ID3D11RenderTargetView* m_RenterTargetView,
+		IDXGISwapChain*			m_SwapChain);
 };
 
+ MyD3dCanvas:: MyD3dCanvas()
+{
+}
+
+ MyD3dCanvas::~ MyD3dCanvas()
+{
+}
+
+ void MyD3dCanvas::Render(ID3D11DeviceContext * m_Context, ID3D11RenderTargetView * m_RenterTargetView, IDXGISwapChain * m_SwapChain)
+ {
+	 // Check if D3D is ready
+	 if (m_Context == NULL)
+		 return;
+
+	 // Clear back buffer
+	 float color[4] = { 0.0f, 0.0f, 0.5f, 1.0f };
+	 m_Context->ClearRenderTargetView(m_RenterTargetView, color);
+
+	 // Present back buffer to display
+	 m_SwapChain->Present(0, 0);
+ }
 
 
 int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCmdLine, int  nCmdShow)
@@ -25,8 +44,7 @@ int APIENTRY WinMain(HINSTANCE  hInstance, HINSTANCE  hPrevInstance, LPSTR  lpCm
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	SumomoGame game(hInstance);
-	game.AddGDI_Canvas(new MyCanvas());
-	
+	game.Add_D3D_Canvas((D3D_FreeCanvas*)(new MyD3dCanvas()));
 		/*
 #ifndef NDEBUG
 #endif

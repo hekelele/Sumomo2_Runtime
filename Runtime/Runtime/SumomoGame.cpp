@@ -44,11 +44,17 @@ namespace Sumomo2::Core {
 		UnregisterClass(L"SumomoWndClass", m_hInstance);
 	}
 
-	void SumomoGame::AddGDI_Canvas(Sumomo2::Render::GDI::GDI_FreeCanvas* canvas)
+	void SumomoGame::Add_D3D_Canvas(Sumomo2::Render::D3D::D3D_FreeCanvas * canvas)
 	{
 		m_Renderer.AddCanvas(canvas);
 	}
-
+	
+	/*
+	void SumomoGame::AddGDI_Canvas(Sumomo2::Render::GDI::GDI_FreeCanvas* canvas)
+	{
+		//m_Renderer.AddCanvas(canvas);
+	}
+	*/
 
 	HRESULT SumomoGame::CheckGameInstance()
 	{
@@ -107,8 +113,8 @@ namespace Sumomo2::Core {
 
 	HRESULT SumomoGame::InitializeSubSystems()
 	{
-		HRESULT hr = m_Renderer.Initialize(m_hWnd);
-		return hr;
+		bool bo = m_Renderer.Initialize(m_hWnd);
+		return BOOL_TO_HR(bo);
 	}
 
 	void SumomoGame::ShowGameWindow()
