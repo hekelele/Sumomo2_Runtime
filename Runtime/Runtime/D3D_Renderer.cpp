@@ -33,7 +33,7 @@ namespace Sumomo2::Render::D3D {
 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-		swapChainDesc.OutputWindow = (HWND)hWnd;
+		swapChainDesc.OutputWindow = (HWND)m_hWnd;
 		swapChainDesc.SampleDesc.Count = 1;
 		swapChainDesc.SampleDesc.Quality = 0;
 		swapChainDesc.Windowed = true;
@@ -81,7 +81,8 @@ namespace Sumomo2::Render::D3D {
 
 		// Check device
 		if (FAILED(hr)) {
-			MessageBox(hWnd, TEXT("A DX11 Video Card is Required"), TEXT("ERROR"), MB_OK);
+			MessageBox(hWnd, TEXT("A DX11 Video Card is Required"),
+				TEXT("ERROR"), MB_OK);
 			return false;
 		}
 
@@ -89,7 +90,8 @@ namespace Sumomo2::Render::D3D {
 		ID3D11Texture2D *pBackBuffer;
 		hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 		if (FAILED(hr)) {
-			MessageBox(hWnd, TEXT("Unable to get back buffer"), TEXT("ERROR"), MB_OK);
+			MessageBox(hWnd, TEXT("Unable to get back buffer"),
+				TEXT("ERROR"), MB_OK);
 			return false;
 		}
 
@@ -102,7 +104,8 @@ namespace Sumomo2::Render::D3D {
 
 		// Check render target view
 		if (FAILED(hr)) {
-			MessageBox(hWnd, TEXT("Unable to create render target view"), TEXT("ERROR"), MB_OK);
+			MessageBox(hWnd, TEXT("Unable to create render target view"),
+				TEXT("ERROR"), MB_OK);
 			return false;
 		}
 
@@ -125,7 +128,7 @@ namespace Sumomo2::Render::D3D {
 	void D3D_Renderer::Render()
 	{
 		for (unsigned int i = 0; i < m_CanvasList.size(); i++) {
-			this->m_CanvasList[i]->Render(m_Context, m_RenterTargetView, m_SwapChain);
+			this->m_CanvasList[i]->Render();
 		}
 	}
 
@@ -141,15 +144,59 @@ namespace Sumomo2::Render::D3D {
 
 	void D3D_Renderer::AddCanvas(D3D_FreeCanvas * canvas)
 	{
-		m_CanvasList.push_back(canvas);
+		canvas->SetRendererInfo(m_hWnd, m_Context,m_Device,m_RenterTargetView, m_SwapChain);
+		if (canvas->CreateResources()) {
+			m_CanvasList.push_back(canvas);
+		}
+		else
+		{
+			MessageBox(m_hWnd, TEXT("Unable to create Resources"),
+				TEXT("ERROR"), MB_OK);
+		}
+	}
+
+	bool D3D_Renderer::CompileShader(LPCWSTR szFilePath, LPCSTR szFunc,
+		LPCSTR szShaderModel, ID3DBlob** buffer)
+	{
+		// Set flags
+		DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS;
+
+#ifndef NDEBUG
+		flags |= D3DCOMPILE_DEBUG;
+#endif
+
+		// Compile shader
+		HRESULT hr;
+		ID3DBlob* errBuffer = 0;
+		hr = ::D3DX11CompileFromFile(
+			szFilePath, 0, 0, szFunc, szShaderModel,
+			flags, 0, 0, buffer, &errBuffer, 0);
+
+		// Check for errors
+		if (FAILED(hr)) {
+			if (errBuffer != NULL) {
+				::OutputDebugStringA((char*)errBuffer->GetBufferPointer());
+				errBuffer->Release();
+			}
+			return false;
+		}
+
+		// Cleanup
+		if (errBuffer != NULL)
+			errBuffer->Release();
+		return true;
 	}
 
 	bool D3D_Renderer::CreateResources()
 	{
+
 		return true;
 	}
 
 	void D3D_Renderer::ReleaseResources()
 	{
+		for (unsigned int i = 0; i < m_CanvasList.size(); i++) {
+			this->m_CanvasList[i]->ReleaseResources();
+		}
 	}
 }

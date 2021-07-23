@@ -21,3 +21,8 @@ inline void SafeRelease(
 		(*ppInterfaceToRelease) = NULL;
 	}
 }
+
+/*
+#ifndef NDEBUG
+#endif
+	}*/

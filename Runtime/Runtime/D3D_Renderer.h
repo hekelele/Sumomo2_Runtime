@@ -12,6 +12,7 @@ namespace Sumomo2::Render::D3D {
 		void Render();
 		void Terminate();
 		void AddCanvas(D3D_FreeCanvas* canvas);
+		static bool CompileShader(LPCWSTR szFilePath, LPCSTR szFunc, LPCSTR szShaderModel, ID3DBlob** buffer);
 	protected:
 		bool CreateResources();
 		void ReleaseResources();
